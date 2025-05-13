@@ -10,16 +10,16 @@
             --primary: #f73c02;
             --secondary: #13477d;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f8f9fa;
         }
-        
+
         .timeline-container {
             position: relative;
         }
-        
+
         .timeline-line {
             position: absolute;
             left: 50%;
@@ -29,12 +29,12 @@
             height: 100%;
             z-index: 1;
         }
-        
+
         .year-container {
             position: relative;
             z-index: 2;
         }
-        
+
         .year-marker {
             width: 80px;
             height: 80px;
@@ -53,18 +53,18 @@
             position: relative;
             z-index: 3;
         }
-        
+
         .year-marker:hover {
             transform: scale(1.05);
             box-shadow: 0 6px 16px rgba(247, 60, 2, 0.4);
         }
-        
+
         .events-container {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s ease;
         }
-        
+
         .event-card {
             background-color: white;
             border-left: 4px solid var(--secondary);
@@ -74,36 +74,36 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
         }
-        
+
         .event-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         }
-        
+
         .event-date {
             color: var(--primary);
             font-weight: bold;
             margin-bottom: 8px;
         }
-        
+
         .event-description {
             color: #333;
             line-height: 1.5;
         }
-        
+
         .expanded {
             max-height: 2000px;
         }
-        
+
         .arrow {
             display: inline-block;
             transition: transform 0.3s ease;
         }
-        
+
         .rotate {
             transform: rotate(180deg);
         }
-        
+
         .header-title {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
@@ -111,7 +111,7 @@
             color: transparent;
             font-weight: bold;
         }
-        
+
         .featured-image {
             width: 100%;
             max-width: 600px;
@@ -119,18 +119,39 @@
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
-        
+
+        /* Estilos adicionados para o logo e imagem circular */
+        .logo-image {
+            width: 100px; /* Ajuste o tamanho conforme necessário */
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover; /* Para manter a proporção e preencher o círculo */
+            margin: 0 auto 20px auto; /* Centraliza e adiciona margem abaixo */
+            display: block; /* Garante que a margem automática funcione */
+        }
+
+        .featured-image-circle {
+            width: 300px; /* Ajuste o tamanho conforme necessário */
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 24px auto;
+            display: block;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+
         @media (max-width: 768px) {
             .timeline-line {
                 left: 40px;
             }
-            
+
             .year-marker {
                 margin: 0;
                 margin-left: 40px;
                 transform: translateX(-50%);
             }
-            
+
             .year-marker:hover {
                 transform: translateX(-50%) scale(1.05);
             }
@@ -140,20 +161,19 @@
 <body class="min-h-screen p-4 md:p-8">
     <div class="max-w-4xl mx-auto">
         <header class="text-center mb-8">
+            <img src="https://cynaramaira.github.io/INFORAALV/logojamildo.png" alt="Logo do Site" class="logo-image">
             <h1 class="text-4xl md:text-5xl font-bold mb-4 header-title">Linha do Tempo</h1>
             <h2 class="text-2xl md:text-3xl font-semibold text-gray-700">Disputa Política: Raquel Lyra vs Álvaro Porto</h2>
             <p class="mt-4 text-gray-600">Uma cronologia dos principais eventos do embate político em Pernambuco</p>
         </header>
-        
-        <!-- Imagem em destaque -->
+
         <div class="text-center mb-10">
-            <img src="https://cynaramaira.github.io/INFORAALV/raquelalvaro.webp" alt="Raquel Lyra e Álvaro Porto em debate político" class="featured-image">
+            <img src="https://cynaramaira.github.io/INFORAALV/raquelalvaro.webp" alt="Raquel Lyra e Álvaro Porto em debate político" class="featured-image-circle">
         </div>
-        
+
         <div class="timeline-container pb-20">
             <div class="timeline-line"></div>
-            
-            <!-- 2023 -->
+
             <div class="year-container mb-16">
                 <div class="year-marker" onclick="toggleEvents('events2023')">
                     2023 <span class="arrow ml-1" id="arrow2023">▼</span>
@@ -163,20 +183,19 @@
                         <div class="event-date">Fevereiro de 2023</div>
                         <div class="event-description">Eleição de Álvaro Porto para presidente da Alepe com apoio do PSB.</div>
                     </div>
-                    
+
                     <div class="event-card">
                         <div class="event-date">Março de 2023</div>
                         <div class="event-description">Dificuldades de Raquel Lyra em aprovar projetos na Alepe devido à base de Porto.</div>
                     </div>
-                    
+
                     <div class="event-card">
                         <div class="event-date">Junho de 2023</div>
                         <div class="event-description">Deputados ligados a Porto cobram transparência na execução orçamentária, gerando atritos.</div>
                     </div>
                 </div>
             </div>
-            
-            <!-- 2024 -->
+
             <div class="year-container mb-16">
                 <div class="year-marker" onclick="toggleEvents('events2024')">
                     2024 <span class="arrow ml-1" id="arrow2024">▼</span>
@@ -186,15 +205,14 @@
                         <div class="event-date">Janeiro de 2024</div>
                         <div class="event-description">Raquel Lyra entra com ação no STF contra pontos da LDO da Alepe.</div>
                     </div>
-                    
+
                     <div class="event-card">
                         <div class="event-date">Fevereiro de 2024</div>
                         <div class="event-description">Vazamento de áudio com críticas de Porto e acusação de violência política por Lyra.</div>
                     </div>
                 </div>
             </div>
-            
-            <!-- 2025 -->
+
             <div class="year-container">
                 <div class="year-marker" onclick="toggleEvents('events2025')">
                     2025 <span class="arrow ml-1" id="arrow2025">▼</span>
@@ -204,42 +222,42 @@
                         <div class="event-date">Abril de 2025</div>
                         <div class="event-description">Porto é nomeado interventor do PSDB em Pernambuco, levando à desfiliação de prefeitos e da vice-governadora.</div>
                     </div>
-                    
+
                     <div class="event-card">
                         <div class="event-date">28 de Abril de 2025</div>
                         <div class="event-description">Álvaro Porto cobra publicamente pagamento de emendas na Amupe; Lyra demonstra confiança na aprovação do empréstimo.</div>
                     </div>
-                    
+
                     <div class="event-card">
                         <div class="event-date">28 de Abril de 2025</div>
                         <div class="event-description">Presidente da Amupe, Marcelo Gouveia, defende a gestão de Raquel Lyra em relação ao pagamento de emendas.</div>
                     </div>
-                    
+
                     <div class="event-card">
                         <div class="event-date">29 de Abril de 2025</div>
                         <div class="event-description">Discussões sobre uniões partidárias (PP-UB, PSDB-Podemos) e seus potenciais impactos na política estadual.</div>
                     </div>
-                    
+
                     <div class="event-card">
                         <div class="event-date">2 de Maio de 2025</div>
                         <div class="event-description">Prefeitos migram para partidos aliados a Raquel Lyra, intensificando a disputa por influência com João Campos.</div>
                     </div>
-                    
+
                     <div class="event-card">
                         <div class="event-date">6 de Maio de 2025</div>
                         <div class="event-description">Antônio Coelho (União Brasil) propõe dividir o empréstimo de R$ 1,5 bilhão entre os municípios.</div>
                     </div>
-                    
+
                     <div class="event-card">
                         <div class="event-date">7 de Maio de 2025</div>
                         <div class="event-description">Líder do Governo na Alepe, Socorro Pimentel, critica a lentidão na sabatina da indicação para Fernando de Noronha.</div>
                     </div>
-                    
+
                     <div class="event-card">
                         <div class="event-date">7 de Maio de 2025</div>
                         <div class="event-description">Alepe publica informe oficial sobre o trancamento da pauta devido ao empréstimo e cobra pagamento de emendas atrasadas.</div>
                     </div>
-                    
+
                     <div class="event-card">
                         <div class="event-date">9 de Maio de 2025</div>
                         <div class="event-description">Raquel Lyra reage às alterações no projeto de empréstimo, acirrando a crise com o Legislativo.</div>
@@ -247,7 +265,7 @@
                 </div>
             </div>
         </div>
-        
+
         <footer class="text-center mt-12 text-gray-500 text-sm">
             <p>Linha do tempo interativa sobre a disputa política entre Raquel Lyra e Álvaro Porto em Pernambuco</p>
         </footer>
@@ -260,12 +278,12 @@
             toggleEvents('events2024');
             toggleEvents('events2025');
         });
-        
+
         function toggleEvents(id) {
             const eventsContainer = document.getElementById(id);
             const yearNumber = id.replace('events', '');
             const arrow = document.getElementById('arrow' + yearNumber);
-            
+
             eventsContainer.classList.toggle('expanded');
             arrow.classList.toggle('rotate');
         }
