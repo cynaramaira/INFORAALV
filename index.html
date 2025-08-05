@@ -9,273 +9,532 @@
         :root {
             --primary: #f73c02;
             --secondary: #13477d;
+            --accent: #ff6b35;
+            --light-bg: #f8fafc;
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f9fa;
+            background: linear-gradient(135deg, var(--light-bg) 0%, #e2e8f0 100%);
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-gradient {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="a" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="white" stop-opacity=".1"/><stop offset="100%" stop-color="white" stop-opacity="0"/></radialGradient></defs><rect width="100" height="20" fill="url(%23a)"/></svg>');
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+
+        .logo-image {
+            width: 220px;
+            height: auto;
+            filter: brightness(0) invert(1);
+            margin: 0 auto 20px auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-image:hover {
+            transform: scale(1.05);
+        }
+
+        .featured-image-circle {
+            width: 320px;
+            height: 280px;
+            border-radius: 50%;
+            margin: 0 auto 40px auto;
+            display: block;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border: 6px solid white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .featured-image-circle:hover {
+            transform: scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
         }
 
         .timeline-container {
             position: relative;
+            padding: 40px 0;
         }
 
         .timeline-line {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            width: 6px;
-            background-color: var(--secondary);
+            width: 8px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
             height: 100%;
             z-index: 1;
+            border-radius: 4px;
+            box-shadow: 0 0 20px rgba(247, 60, 2, 0.3);
         }
 
         .year-container {
             position: relative;
             z-index: 2;
+            margin-bottom: 60px;
         }
 
         .year-marker {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--accent));
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: bold;
             margin: 0 auto;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(247, 60, 2, 0.3);
-            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(247, 60, 2, 0.4);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             z-index: 3;
+            border: 4px solid white;
+        }
+
+        .year-marker::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .year-marker:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 16px rgba(247, 60, 2, 0.4);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 15px 35px rgba(247, 60, 2, 0.5);
+        }
+
+        .year-marker:hover::before {
+            opacity: 1;
         }
 
         .events-container {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s ease;
+            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .events-container.expanded {
+            max-height: 3000px;
         }
 
         .event-card {
-            background-color: white;
-            border-left: 4px solid var(--secondary);
-            margin: 20px 0;
-            padding: 16px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            background: white;
+            border-left: 6px solid var(--secondary);
+            margin: 25px 0;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideInUp 0.6s ease forwards;
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
         }
 
         .event-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-left-color: var(--primary);
+        }
+
+        .event-card:hover::before {
+            width: 100%;
+            opacity: 0.05;
+        }
+
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .event-date {
             color: var(--primary);
             font-weight: bold;
-            margin-bottom: 8px;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .event-date::before {
+            content: '📅';
+            font-size: 1.2rem;
         }
 
         .event-description {
-            color: #333;
-            line-height: 1.5;
-        }
-
-        .expanded {
-            max-height: 2000px;
+            color: #374151;
+            line-height: 1.7;
+            font-size: 1rem;
         }
 
         .arrow {
             display: inline-block;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.2rem;
         }
 
         .rotate {
             transform: rotate(180deg);
         }
 
-        .header-title {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
             font-weight: bold;
-        }
-
-        .featured-image {
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto 24px auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-             /* Estilos adicionados para o logo e imagem circular */
-        .logo-image {
-            width: 200px; /* Ajuste o tamanho conforme necessário */
-            height: 50px;
-            margin: 0 auto 20px auto; /* Centraliza e adiciona margem abaixo */
-            display: block; /* Garante que a margem automática funcione */
-        }
-
-        .featured-image-circle {
-            width: 300px; /* Ajuste o tamanho conforme necessário */
-            height: 250px;
-            border-radius: 50%;
-            margin: 0 auto 24px auto;
+            color: var(--primary);
             display: block;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
+        .stat-label {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+
+        .cta-banner {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+            50% { transform: translate(-50%, -50%) rotate(180deg); }
+        }
+
+        .pulse-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
 
         @media (max-width: 768px) {
             .timeline-line {
-                left: 40px;
+                left: 60px;
             }
 
             .year-marker {
                 margin: 0;
-                margin-left: 40px;
+                margin-left: 60px;
                 transform: translateX(-50%);
+                width: 80px;
+                height: 80px;
+                font-size: 1.4rem;
             }
 
             .year-marker:hover {
                 transform: translateX(-50%) scale(1.05);
             }
+
+            .event-card {
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+
+            .featured-image-circle {
+                width: 250px;
+                height: 220px;
+            }
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(247, 60, 2, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .scroll-indicator:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 30px rgba(247, 60, 2, 0.4);
+        }
+
+        .highlight-important {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left-color: #f59e0b !important;
         }
     </style>
 </head>
-<body class="min-h-screen p-4 md:p-8">
-    <div class="max-w-4xl mx-auto">
-        <header class="text-center mb-8">
-            <img src="https://cynaramaira.github.io/INFORAALV/logojamildo.png" alt="Logo do Site" class="logo-image">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4 header-title">Linha do Tempo</h1>
-            <h2 class="text-2xl md:text-3xl font-semibold text-gray-700">Disputa Política: Raquel Lyra vs Álvaro Porto</h2>
-            <p class="mt-4 text-gray-600">Uma cronologia dos principais eventos do embate político em Pernambuco</p>
-        </header>
+<body class="min-h-screen">
+    <div class="scroll-indicator" onclick="scrollToTop()" id="scrollBtn" style="display: none;">
+        ↑
+    </div>
 
-        <div class="text-center mb-10">
+    <header class="header-gradient py-16 px-4">
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <img src="https://cynaramaira.github.io/INFORAALV/logojamildo.png" alt="Logo do Site" class="logo-image">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">Linha do Tempo Interativa</h1>
+            <h2 class="text-2xl md:text-3xl font-semibold mb-6 opacity-90">Disputa Política: Raquel Lyra vs Álvaro Porto</h2>
+            <p class="text-lg opacity-80 max-w-2xl mx-auto">Explore a cronologia completa dos principais eventos que marcaram o embate político em Pernambuco</p>
+            
+            <div class="stats-container mt-12">
+                <div class="stat-card">
+                    <span class="stat-number">16</span>
+                    <div class="stat-label">Eventos Documentados</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">3</span>
+                    <div class="stat-label">Anos de Conflito</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">R$ 3,2B</span>
+                    <div class="stat-label">Em Empréstimos Travados</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center py-16">
             <img src="https://cynaramaira.github.io/INFORAALV/raquelalvaro.webp" alt="Raquel Lyra e Álvaro Porto em debate político" class="featured-image-circle">
+            
+            <div class="cta-banner">
+                <h3 class="text-2xl font-bold mb-4">📊 Acompanhe Cada Momento Decisivo</h3>
+                <p class="text-lg opacity-90 mb-6">Clique nos anos abaixo para descobrir os bastidores da política pernambucana</p>
+                <div class="flex justify-center items-center gap-2">
+                    <span class="pulse-dot"></span>
+                    <span class="text-sm">Todos os eventos já estão expandidos para sua exploração</span>
+                </div>
+            </div>
         </div>
 
         <div class="timeline-container pb-20">
             <div class="timeline-line"></div>
 
-            <div class="year-container mb-16">
+            <div class="year-container">
                 <div class="year-marker" onclick="toggleEvents('events2023')">
-                    2023 <span class="arrow ml-1" id="arrow2023">▼</span>
+                    2023 <span class="arrow ml-2" id="arrow2023">▼</span>
                 </div>
-                <div class="events-container mt-8" id="events2023">
+                <div class="events-container mt-12 expanded" id="events2023">
                     <div class="event-card">
                         <div class="event-date">Fevereiro de 2023</div>
-                        <div class="event-description">Eleição de Álvaro Porto para presidente da Alepe com apoio do PSB.</div>
+                        <div class="event-description">Eleição de Álvaro Porto para presidente da Alepe com apoio do PSB, estabelecendo uma base de poder que posteriormente entraria em conflito com o Executivo.</div>
                     </div>
 
                     <div class="event-card">
                         <div class="event-date">Março de 2023</div>
-                        <div class="event-description">Dificuldades de Raquel Lyra em aprovar projetos na Alepe devido à base de Porto.</div>
+                        <div class="event-description">Primeiras dificuldades de Raquel Lyra em aprovar projetos na Alepe devido à influência crescente da base política de Porto na Casa.</div>
                     </div>
 
                     <div class="event-card">
                         <div class="event-date">Junho de 2023</div>
-                        <div class="event-description">Deputados ligados a Porto cobram transparência na execução orçamentária, gerando atritos.</div>
+                        <div class="event-description">Deputados alinhados a Porto começam a cobrar maior transparência na execução orçamentária do governo estadual, gerando os primeiros atritos significativos.</div>
                     </div>
                 </div>
             </div>
 
-            <div class="year-container mb-16">
+            <div class="year-container">
                 <div class="year-marker" onclick="toggleEvents('events2024')">
-                    2024 <span class="arrow ml-1" id="arrow2024">▼</span>
+                    2024 <span class="arrow ml-2" id="arrow2024">▼</span>
                 </div>
-                <div class="events-container mt-8" id="events2024">
+                <div class="events-container mt-12 expanded" id="events2024">
                     <div class="event-card">
                         <div class="event-date">Janeiro de 2024</div>
-                        <div class="event-description">Raquel Lyra entra com ação no STF contra pontos da LDO da Alepe.</div>
+                        <div class="event-description">Raquel Lyra entra com ação no Supremo Tribunal Federal questionando pontos específicos da Lei de Diretrizes Orçamentárias aprovada pela Alepe.</div>
                     </div>
 
-                    <div class="event-card">
+                    <div class="event-card highlight-important">
                         <div class="event-date">Fevereiro de 2024</div>
-                        <div class="event-description">Vazamento de áudio com críticas de Porto e acusação de violência política por Lyra.</div>
+                        <div class="event-description">Vazamento de áudio com críticas de Porto ao governo estadual, seguido de acusação formal de violência política feita por Raquel Lyra, escalando publicamente o conflito.</div>
                     </div>
                 </div>
             </div>
 
             <div class="year-container">
                 <div class="year-marker" onclick="toggleEvents('events2025')">
-                    2025 <span class="arrow ml-1" id="arrow2025">▼</span>
+                    2025 <span class="arrow ml-2" id="arrow2025">▼</span>
                 </div>
-                <div class="events-container mt-8" id="events2025">
-                    <div class="event-card">
-                        <div class="event-date">Abril de 2025</div>
-                        <div class="event-description">Porto é nomeado interventor do PSDB em Pernambuco, levando à desfiliação de prefeitos e da vice-governadora.</div>
+                <div class="events-container mt-12 expanded" id="events2025">
+                    <div class="event-card highlight-important">
+                        <div class="event-date">20 de Março de 2025</div>
+                        <div class="event-description">Raquel Lyra compareceu à Assembleia Legislativa para reforçar o apelo pela votação de duas operações de crédito que somavam R$ 3,2 bilhões – R$ 1,7 bilhão em tramitação desde março e mais R$ 1,5 bilhão do semestre anterior. Ela acusou a Casa de "lentidão" na tramitação, enquanto Porto mantinha a pauta parada em protesto contra o não pagamento total das emendas parlamentares de 2024.</div>
+                    </div>
+
+                    <div class="event-card highlight-important">
+                        <div class="event-date">3 de Abril de 2025</div>
+                        <div class="event-description">Após intervenção da direção nacional do PSDB, o presidente da Alepe, Álvaro Porto, assumiu o comando estadual da sigla. Em retaliação, Raquel Lyra, a vice-governadora e 30 dos 32 prefeitos tucanos de Pernambuco deixaram o partido e migraram para o PSD, escancarando definitivamente a ruptura entre ex-correligionários.</div>
                     </div>
 
                     <div class="event-card">
                         <div class="event-date">28 de Abril de 2025</div>
-                        <div class="event-description">Álvaro Porto cobra publicamente pagamento de emendas na Amupe; Lyra demonstra confiança na aprovação do empréstimo.</div>
+                        <div class="event-description">Álvaro Porto cobra publicamente pagamento de emendas durante evento na Amupe; Raquel Lyra demonstra confiança na aprovação do empréstimo de R$ 1,5 bilhão.</div>
                     </div>
 
                     <div class="event-card">
                         <div class="event-date">28 de Abril de 2025</div>
-                        <div class="event-description">Presidente da Amupe, Marcelo Gouveia, defende a gestão de Raquel Lyra em relação ao pagamento de emendas.</div>
+                        <div class="event-description">Presidente da Amupe, Marcelo Gouveia, defende publicamente a gestão de Raquel Lyra em relação ao cronograma de pagamento de emendas parlamentares.</div>
                     </div>
 
                     <div class="event-card">
                         <div class="event-date">29 de Abril de 2025</div>
-                        <div class="event-description">Discussões sobre uniões partidárias (PP-UB, PSDB-Podemos) e seus potenciais impactos na política estadual.</div>
+                        <div class="event-description">Intensificam-se discussões sobre potenciais uniões partidárias (PP-UB, PSDB-Podemos) e seus impactos estratégicos na reconfiguração do cenário político estadual.</div>
                     </div>
 
                     <div class="event-card">
                         <div class="event-date">2 de Maio de 2025</div>
-                        <div class="event-description">Prefeitos migram para partidos aliados a Raquel Lyra, intensificando a disputa por influência com João Campos.</div>
+                        <div class="event-description">Onda de migração partidária: prefeitos deixam legendas neutras e migram para partidos aliados a Raquel Lyra, intensificando a disputa por influência política com João Campos.</div>
                     </div>
 
                     <div class="event-card">
                         <div class="event-date">6 de Maio de 2025</div>
-                        <div class="event-description">Antônio Coelho (União Brasil) propõe dividir o empréstimo de R$ 1,5 bilhão entre os municípios.</div>
+                        <div class="event-description">Deputado Antônio Coelho (União Brasil) propõe alteração controversa: dividir o empréstimo de R$ 1,5 bilhão diretamente entre todos os municípios pernambucanos.</div>
                     </div>
 
                     <div class="event-card">
                         <div class="event-date">7 de Maio de 2025</div>
-                        <div class="event-description">Líder do Governo na Alepe, Socorro Pimentel, critica a lentidão na sabatina da indicação para Fernando de Noronha.</div>
+                        <div class="event-description">Socorro Pimentel, líder do Governo na Alepe, critica publicamente a lentidão na sabatina da indicação governamental para a administração de Fernando de Noronha.</div>
                     </div>
 
                     <div class="event-card">
                         <div class="event-date">7 de Maio de 2025</div>
-                        <div class="event-description">Alepe publica informe oficial sobre o trancamento da pauta devido ao empréstimo e cobra pagamento de emendas atrasadas.</div>
+                        <div class="event-description">Alepe publica informe oficial confirmando o trancamento total da pauta legislativa devido ao impasse sobre o empréstimo e cobra pagamento integral das emendas atrasadas de 2024.</div>
                     </div>
 
                     <div class="event-card">
                         <div class="event-date">9 de Maio de 2025</div>
-                        <div class="event-description">Raquel Lyra reage às alterações no projeto de empréstimo, acirrando a crise com o Legislativo.</div>
+                        <div class="event-description">Raquel Lyra reage duramente às alterações propostas no projeto de empréstimo de R$ 1,5 bilhão, acusando o Legislativo de obstrução e acirrando ainda mais a crise institucional.</div>
+                    </div>
+
+                    <div class="event-card highlight-important">
+                        <div class="event-date">12 de Maio de 2025</div>
+                        <div class="event-description">Divergências sobre o pagamento de emendas impositivas de 2024 geraram representações formais ao Tribunal de Contas do Estado. A falta de quitação de R$ 61 milhões – parte dos R$ 257 milhões previstos – foi estrategicamente usada por Porto e deputados de oposição para travar votações até que o Executivo regularizasse os repasses.</div>
+                    </div>
+
+                    <div class="event-card">
+                        <div class="event-date">9 de Julho de 2025</div>
+                        <div class="event-description">Mesmo durante o recesso parlamentar, Raquel Lyra acusou o Legislativo de "atrapalhar o desenvolvimento do Estado" ao segurar projetos estratégicos do Executivo. Porto rebateu afirmando que a "inoperância é do Executivo" e desafiou a governadora a apontar obras paralisadas por falta de aprovação legislativa.</div>
+                    </div>
+
+                    <div class="event-card highlight-important">
+                        <div class="event-date">4 de Agosto de 2025</div>
+                        <div class="event-description">A Alepe, sob presidência de Álvaro Porto, aprovou a instalação de uma CPI para investigar contrato de publicidade de R$ 1,2 bilhão do governo Raquel Lyra. A comissão parlamentar de inquérito, proposta por deputados de oposição e apoiada por Porto, investiga suspeitas de direcionamento e potencial conflito de interesses envolvendo agências publicitárias e familiares da governadora.</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <footer class="text-center mt-12 text-gray-500 text-sm">
-            <p>Linha do tempo interativa sobre a disputa política entre Raquel Lyra e Álvaro Porto em Pernambuco</p>
+        <footer class="text-center py-16 text-gray-600">
+            <div class="max-w-2xl mx-auto">
+                <h3 class="text-xl font-semibold mb-4 text-gray-800">📈 Continue Acompanhando</h3>
+                <p class="text-lg mb-6">Esta linha do tempo será atualizada conforme novos desenvolvimentos surgirem no cenário político pernambucano.</p>
+                <div class="flex justify-center items-center gap-4 text-sm">
+                    <span class="pulse-dot"></span>
+                    <span>Última atualização: Agosto de 2025</span>
+                </div>
+            </div>
         </footer>
     </div>
 
     <script>
-        // Abrir todos os anos por padrão
-        document.addEventListener('DOMContentLoaded', function() {
-            toggleEvents('events2023');
-            toggleEvents('events2024');
-            toggleEvents('events2025');
-        });
-
+        // Função para mostrar/ocultar eventos
         function toggleEvents(id) {
             const eventsContainer = document.getElementById(id);
             const yearNumber = id.replace('events', '');
@@ -283,7 +542,75 @@
 
             eventsContainer.classList.toggle('expanded');
             arrow.classList.toggle('rotate');
+
+            // Animar os cards individualmente
+            if (eventsContainer.classList.contains('expanded')) {
+                const cards = eventsContainer.querySelectorAll('.event-card');
+                cards.forEach((card, index) => {
+                    card.style.animationDelay = `${index * 0.1}s`;
+                    card.style.animation = 'none';
+                    card.offsetHeight; // Trigger reflow
+                    card.style.animation = 'slideInUp 0.6s ease forwards';
+                });
+            }
         }
+
+        // Mostrar botão de scroll
+        window.addEventListener('scroll', function() {
+            const scrollBtn = document.getElementById('scrollBtn');
+            if (window.pageYOffset > 300) {
+                scrollBtn.style.display = 'flex';
+            } else {
+                scrollBtn.style.display = 'none';
+            }
+        });
+
+        // Função de scroll para o topo
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Inicializar com todos os anos expandidos
+        document.addEventListener('DOMContentLoaded', function() {
+            // Pequeno delay para melhor experiência visual
+            setTimeout(() => {
+                const events = ['events2023', 'events2024', 'events2025'];
+                events.forEach(eventId => {
+                    const container = document.getElementById(eventId);
+                    const yearNumber = eventId.replace('events', '');
+                    const arrow = document.getElementById('arrow' + yearNumber);
+                    
+                    container.classList.add('expanded');
+                    arrow.classList.add('rotate');
+                });
+            }, 500);
+
+            // Adicionar efeito de parallax suave no header
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const header = document.querySelector('.header-gradient');
+                if (header) {
+                    header.style.transform = `translateY(${scrolled * 0.5}px)`;
+                }
+            });
+        });
+
+        // Adicionar efeito de hover nos cards para melhor interatividade
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.event-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
     </script>
 </body>
 </html>
