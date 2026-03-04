@@ -133,7 +133,7 @@
             transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .events-container.expanded {
-            max-height: 5000px;
+            max-height: 10000px;
         }
         .event-card {
             background: white;
@@ -331,11 +331,11 @@
             <p class="text-lg opacity-80 max-w-2xl mx-auto">Explore a cronologia completa dos principais eventos que marcaram o embate político em Pernambuco</p>
             <div class="stats-container mt-12">
                 <div class="stat-card">
-                    <span class="stat-number">21</span>
+                    <span class="stat-number">29</span>
                     <div class="stat-label">Eventos Documentados</div>
                 </div>
                 <div class="stat-card">
-                    <span class="stat-number">3</span>
+                    <span class="stat-number">4</span>
                     <div class="stat-label">Anos de Conflito</div>
                 </div>
             </div>
@@ -469,7 +469,51 @@
                     </div>
                     <div class="event-card">
                         <div class="event-date">20 de Outubro de 2025</div>
-                        <div class="event-description">No plenário da Alepe, Álvaro Porto rebate as críticas e afirma que o problema do Governo não é falta de dinheiro ou obstrução do Legislativo, mas sim "falta de gestão". Sobre o empréstimo de R$ 1,7 bilhão, Porto declara: "Eu estou analisando esse projeto e a gente está vendo que é uma coisa que não tem pressa".</div>
+                        <div class="event-description">Álvaro Porto critica publicamente Raquel Lyra no plenário da Alepe. Ele condena a atitude de vincular obras, como o Arco Metropolitano, à aprovação de um novo empréstimo. O deputado afirma que o governo já possui mais de R$ 11 bilhões autorizados e executou apenas uma parte desse montante. Ele acusa a governadora de "falta de gestão".</div>
+                    </div>
+                    <div class="event-card">
+                        <div class="event-date">11 de Novembro de 2025</div>
+                        <div class="event-description">Porto anuncia a votação do pedido de empréstimo de R$ 1,7 bilhão para o dia 17. O parlamentar reforça que o recurso serve apenas para garantir "espaço fiscal de 2026". Ele também questiona a capacidade do governo de executar todos os créditos já aprovados.</div>
+                    </div>
+                    <div class="event-card">
+                        <div class="event-date">17 e 18 de Novembro de 2025</div>
+                        <div class="event-description">A Alepe não vota o empréstimo. Porto retira a matéria da pauta após tensão em torno da PEC das emendas e afirma que o governo não terá tempo de executar todos os recursos. Raquel reclama publicamente da demora e rejeita o uso eleitoral da operação.</div>
+                    </div>
+                    <div class="event-card">
+                        <div class="event-date">18 de Novembro de 2025</div>
+                        <div class="event-description">Porto avisa que a Casa retomará a análise do empréstimo apenas em fevereiro de 2026, após o recesso. Ele declara que "a governadora manda no Palácio; aqui, não". O presidente da Alepe acrescenta que o Legislativo avaliará a execução de obras e empréstimos antes de aprovar novas dívidas.</div>
+                    </div>
+                    <div class="event-card">
+                        <div class="event-date">16 de Dezembro de 2025</div>
+                        <div class="event-description">O plenário da Alepe aprova o Orçamento do Estado para 2026 e a autorização para o empréstimo de R$ 1,7 bilhão. A votação envolve negociações sobre emendas e destinação de recursos.</div>
+                    </div>
+                    <div class="event-card">
+                        <div class="event-date">22 de Dezembro de 2025</div>
+                        <div class="event-description">Raquel veta a maior parte das mudanças da Alepe na Lei Orçamentária Anual (LOA) de 2026. Os vetos incluem dispositivos que limitam o poder de remanejamento do Executivo. No mesmo dia, Álvaro Porto edita um ato para rejeitar a mensagem de veto por vício formal. O deputado promulga a LOA conforme a aprovação dos parlamentares.</div>
+                    </div>
+                    <div class="event-card">
+                        <div class="event-date">23 de Dezembro de 2025</div>
+                        <div class="event-description">O Estado passa a ter duas versões da LOA. Uma versão tem os vetos da governadora e a outra tem a promulgação sem vetos do presidente da Alepe. Raquel Lyra aponta risco ao funcionamento do Estado e admite recorrer à Justiça. Álvaro Porto afirma que apenas a lei promulgada pelo Legislativo possui validade.</div>
+                    </div>
+                    <div class="event-card highlight-important">
+                        <div class="event-date">30 de Dezembro de 2025</div>
+                        <div class="event-description">O Tribunal de Justiça de Pernambuco (TJPE) emite uma decisão liminar em mandado de segurança do Executivo. O tribunal determina a vigência da versão da LOA publicada pela governadora. A medida anula os atos da Presidência da Alepe na disputa orçamentária.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="year-container">
+                <div class="year-marker" onclick="toggleEvents('events2026')">
+                    2026 <span class="arrow ml-2" id="arrow2026">▼</span>
+                </div>
+                <div class="events-container mt-12 expanded" id="events2026">
+                    <div class="event-card">
+                        <div class="event-date">8 de Janeiro de 2026</div>
+                        <div class="event-description">A Procuradoria da Alepe protocola um agravo interno no TJPE contra a liminar favorável a Raquel Lyra. O Legislativo tenta restabelecer a LOA promulgada por Álvaro Porto.</div>
+                    </div>
+                    <div class="event-card highlight-important">
+                        <div class="event-date">Fevereiro e Março de 2026</div>
+                        <div class="event-description">A maioria do TJPE vota para anular os atos da Presidência da Alepe e manter a versão da governadora durante o julgamento do caso da LOA 2026. Um desembargador faz um pedido de vista e suspende o desfecho do processo. A atitude prolonga a indefinição sobre o texto final do Orçamento estadual.</div>
                     </div>
                 </div>
             </div>
@@ -481,7 +525,7 @@
                 <p class="text-lg mb-6">Esta linha do tempo será atualizada conforme novos desenvolvimentos surgirem no cenário político pernambucano.</p>
                 <div class="flex justify-center items-center gap-4 text-sm">
                     <span class="pulse-dot"></span>
-                    <span>Última atualização: Outubro de 2025</span>
+                    <span>Última atualização: Março de 2026</span>
                 </div>
             </div>
         </footer>
@@ -531,17 +575,18 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Pequeno delay para melhor experiência visual
             setTimeout(() => {
-                const events = ['events2023', 'events2024', 'events2025'];
+                const events = ['events2023', 'events2024', 'events2025', 'events2026'];
                 events.forEach(eventId => {
                     const container = document.getElementById(eventId);
-                    const yearNumber = eventId.replace('events', '');
-                    const arrow = document.getElementById('arrow' + yearNumber);
-                    container.classList.add('expanded');
-                    arrow.classList.add('rotate');
+                    if(container) {
+                        const yearNumber = eventId.replace('events', '');
+                        const arrow = document.getElementById('arrow' + yearNumber);
+                        container.classList.add('expanded');
+                        if(arrow) arrow.classList.add('rotate');
+                    }
                 });
             }, 500);
         });
     </script>
 </body>
 </html>
-
